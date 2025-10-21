@@ -1,0 +1,472 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Theme Variables */
+:root {
+  /* Light Theme Colors - Light backgrounds, dark text/icons */
+  --primary: #2563eb;
+  --primary-content: #ffffff;
+  --secondary: #64748b;
+  --secondary-content: #ffffff;
+  --accent: #f59e0b;
+  --accent-content: #ffffff;
+  --neutral: #1e293b;
+  --neutral-content: #ffffff;
+  --base-100: #ffffff;
+  --base-200: #f8fafc;
+  --base-300: #e2e8f0;
+  --base-content: #1e293b;
+  --info: #0ea5e9;
+  --info-content: #ffffff;
+  --success: #10b981;
+  --success-content: #ffffff;
+  --warning: #f59e0b;
+  --warning-content: #ffffff;
+  --error: #ef4444;
+  --error-content: #ffffff;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Colors - Dark backgrounds, light text/icons */
+  --primary: #3b82f6;
+  --primary-content: #ffffff;
+  --secondary: #64748b;
+  --secondary-content: #ffffff;
+  --accent: #f59e0b;
+  --accent-content: #ffffff;
+  --neutral: #0f172a;
+  --neutral-content: #ffffff;
+  --base-100: #0f172a;
+  --base-200: #1e293b;
+  --base-300: #334155;
+  --base-content: #f1f5f9;
+  --info: #0ea5e9;
+  --info-content: #ffffff;
+  --success: #10b981;
+  --success-content: #ffffff;
+  --warning: #f59e0b;
+  --warning-content: #ffffff;
+  --error: #ef4444;
+  --error-content: #ffffff;
+}
+
+/* Custom Styles */
+.theme-toggle {
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .card-hover:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary));
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  border: 1px solid var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+}
+
+.btn-accent {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ensure proper contrast for text and icons */
+.text-base-content {
+  color: var(--base-content) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+.text-accent {
+  color: var(--accent) !important;
+}
+
+.text-info {
+  color: var(--info) !important;
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-warning {
+  color: var(--warning) !important;
+}
+
+.text-error {
+  color: var(--error) !important;
+}
+
+/* Ensure SVG icons inherit proper colors */
+svg {
+  color: inherit;
+}
+
+/* Fix dropdown visibility in light mode */
+.dropdown-content {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+  border: 1px solid var(--base-300) !important;
+}
+
+.dropdown-content li a {
+  color: var(--base-content) !important;
+}
+
+.dropdown-content li a:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+.dropdown-content li button {
+  color: var(--base-content) !important;
+}
+
+.dropdown-content li button:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+/* Fix DaisyUI dropdown classes */
+.menu-sm.dropdown-content {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+  border: 1px solid var(--base-300) !important;
+}
+
+.menu-sm.dropdown-content li a {
+  color: var(--base-content) !important;
+}
+
+.menu-sm.dropdown-content li a:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+.menu-sm.dropdown-content li button {
+  color: var(--base-content) !important;
+}
+
+.menu-sm.dropdown-content li button:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+/* Fix all dropdown content */
+.dropdown-content,
+.menu-dropdown,
+.menu-sm.dropdown-content {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+  border: 1px solid var(--base-300) !important;
+}
+
+.dropdown-content *,
+.menu-dropdown *,
+.menu-sm.dropdown-content * {
+  color: var(--base-content) !important;
+}
+
+/* Specific fixes for navbar dropdowns */
+.navbar .dropdown-content {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+  border: 1px solid var(--base-300) !important;
+}
+
+.navbar .dropdown-content li a {
+  color: var(--base-content) !important;
+}
+
+.navbar .dropdown-content li a:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+.navbar .dropdown-content li button {
+  color: var(--base-content) !important;
+}
+
+.navbar .dropdown-content li button:hover {
+  background-color: var(--base-200) !important;
+  color: var(--base-content) !important;
+}
+
+/* Fix user dropdown specifically */
+.dropdown-end .dropdown-content {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+  border: 1px solid var(--base-300) !important;
+}
+
+.dropdown-end .dropdown-content li {
+  color: var(--base-content) !important;
+}
+
+.dropdown-end .dropdown-content li a {
+  color: var(--base-content) !important;
+}
+
+.dropdown-end .dropdown-content li button {
+  color: var(--base-content) !important;
+}
+
+/* Comprehensive dropdown fix */
+.dropdown-content,
+.dropdown-content *,
+.menu-sm.dropdown-content,
+.menu-sm.dropdown-content *,
+.dropdown-end .dropdown-content,
+.dropdown-end .dropdown-content * {
+  background-color: var(--base-100) !important;
+  color: var(--base-content) !important;
+}
+
+.dropdown-content li:hover,
+.menu-sm.dropdown-content li:hover,
+.dropdown-end .dropdown-content li:hover {
+  background-color: var(--base-200) !important;
+}
+
+/* Ensure text visibility in light mode */
+[data-theme="light"] .dropdown-content,
+[data-theme="light"] .dropdown-content *,
+[data-theme="light"] .menu-sm.dropdown-content,
+[data-theme="light"] .menu-sm.dropdown-content * {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+}
+
+[data-theme="light"] .dropdown-content li:hover,
+[data-theme="light"] .menu-sm.dropdown-content li:hover {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--base-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Remove blinking cursor and improve focus states */
+* {
+  caret-color: transparent;
+}
+
+/* Remove blinking cursor from all input elements */
+input, textarea, select {
+  caret-color: transparent;
+}
+
+/* Only show cursor when actively typing */
+input:focus, textarea:focus, select:focus {
+  caret-color: var(--primary);
+}
+
+/* Remove outline and add custom focus styles */
+*:focus {
+  outline: none;
+}
+
+/* Custom focus styles for interactive elements */
+button:focus,
+.btn:focus,
+input:focus,
+textarea:focus,
+select:focus,
+a:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Remove focus styles for mouse users */
+button:focus:not(:focus-visible),
+.btn:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Keep focus styles for keyboard navigation */
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Disable text selection on non-text elements */
+button, .btn, .card, .navbar, .menu {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Allow text selection in input fields and content areas */
+input, textarea, .content, .text-content {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* Remove cursor pointer from non-clickable elements */
+body, html, div, span, p, h1, h2, h3, h4, h5, h6 {
+  cursor: default;
+}
+
+/* Ensure clickable elements have pointer cursor */
+button, .btn, a, [role="button"], [onclick] {
+  cursor: pointer;
+}
+
+/* Remove cursor from disabled elements */
+button:disabled, .btn:disabled, input:disabled, textarea:disabled, select:disabled {
+  cursor: not-allowed;
+}
+
+/* Image Slider Styles */
+.image-slider-container {
+  position: relative;
+}
+
+.image-slider-main {
+  transition: all 0.3s ease-in-out;
+}
+
+.image-slider-thumbnails {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.image-slider-thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.image-slider-thumbnails::-webkit-scrollbar-track {
+  background: var(--base-200);
+  border-radius: 3px;
+}
+
+.image-slider-thumbnails::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.image-slider-thumbnails::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  opacity: 0.8;
+}
+
+.image-slider-nav-btn {
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.image-slider-nav-btn:hover {
+  transform: scale(1.1);
+}
+
+.image-slider-counter {
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.image-slider-thumbnail {
+  transition: all 0.2s ease;
+}
+
+.image-slider-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.image-slider-thumbnail.active {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}

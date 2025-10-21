@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-hotel"></i> Grand Hotel</h1>
+            <p>Your perfect stay awaits</p>
+        </header>
+
+        <main class="main-content">
+            <div class="booking-section">
+                <h2>Book Your Room</h2>
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="guestName">Full Name</label>
+                        <input type="text" id="guestName" name="guestName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roomType">Room Type</label>
+                        <select id="roomType" name="roomType" required>
+                            <option value="">Select Room Type</option>
+                            <option value="standard">Standard Room - $100/night</option>
+                            <option value="deluxe">Deluxe Room - $150/night</option>
+                            <option value="suite">Suite - $250/night</option>
+                            <option value="presidential">Presidential Suite - $500/night</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkIn">Check-in Date</label>
+                            <input type="date" id="checkIn" name="checkIn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkOut">Check-out Date</label>
+                            <input type="date" id="checkOut" name="checkOut" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select Guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests (Optional)</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special requirements or requests..."></textarea>
+                    </div>
+
+                    <button type="submit" class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </form>
+            </div>
+
+            <div class="rooms-section">
+                <h2>Available Rooms</h2>
+                <div class="rooms-grid" id="roomsGrid">
+                    <!-- Rooms will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="bookings-section">
+                <h2>Your Bookings</h2>
+                <div class="bookings-list" id="bookingsList">
+                    <p class="no-bookings">No bookings yet. Make your first reservation!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-check-circle"></i> Booking Confirmed!</h2>
+            <div id="confirmationDetails"></div>
+            <button id="closeModal" class="close-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

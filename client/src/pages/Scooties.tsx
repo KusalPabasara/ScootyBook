@@ -140,14 +140,14 @@ const Scooties: React.FC = () => {
   console.log('🔍 Render - loading state:', loading);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Available Scooties</h1>
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Available Scooties</h1>
         
         {/* Filters */}
-        <div className="card bg-base-100 shadow-xl p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Filters</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="card bg-base-100 shadow-xl p-4 sm:p-6 mb-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Filters</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Brand</span>
@@ -211,19 +211,19 @@ const Scooties: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex justify-between items-center mt-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 gap-4">
             <div className="text-sm text-base-content/70">
               Showing {scooties.length} of {pagination.totalItems} scooties
             </div>
-            <div className="flex gap-2">
-              <button onClick={applyFilters} className="btn btn-primary">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <button onClick={applyFilters} className="btn btn-primary btn-sm sm:btn-md">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
                 </svg>
                 Apply Filters
               </button>
-              <button onClick={clearFilters} className="btn btn-outline">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button onClick={clearFilters} className="btn btn-outline btn-sm sm:btn-md">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
                 Clear Filters
@@ -244,7 +244,7 @@ const Scooties: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {scooties.map((scooty) => {
               console.log('🛵 Rendering scooty:', scooty);
               return <ScootyCard key={scooty._id} scooty={scooty} />;

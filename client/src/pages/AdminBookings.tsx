@@ -26,6 +26,12 @@ interface Booking {
   specialRequests?: string;
   paymentMethod?: string;
   paymentStatus?: string;
+  deliveryMode?: 'pickup' | 'delivery';
+  deliveryAddress?: string;
+  deliveryLocation?: {
+    lat: number;
+    lng: number;
+  };
   createdAt: string;
 }
 
@@ -218,7 +224,13 @@ const AdminBookings: React.FC = () => {
                       <h3 className="font-semibold mb-2">Booking Details</h3>
                       <p><strong>Start:</strong> {formatDate(booking.startDate)}</p>
                       <p><strong>End:</strong> {formatDate(booking.endDate)}</p>
-                      <p><strong>Collection:</strong> Store Pickup Required</p>
+                      <p><strong>Delivery Mode:</strong> 
+                        <span className={`badge badge-sm ml-2 ${
+                          booking.deliveryMode === 'delivery' ? 'badge-info' : 'badge-success'
+                        }`}>
+                          {booking.deliveryMode === 'delivery' ? 'Delivery' : 'Pickup'}
+                        </span>
+                      </p>
                       <p><strong>Payment Method:</strong> {booking.paymentMethod?.replace('_', ' ') || 'Cash on Pickup'}</p>
                       <p><strong>Payment Status:</strong> 
                         <span className={`badge badge-sm ml-2 ${
@@ -231,6 +243,31 @@ const AdminBookings: React.FC = () => {
                       </p>
                     </div>
                   </div>
+
+                  {/* Delivery Location Info */}
+                  {booking.deliveryMode === 'delivery' && booking.deliveryLocation && (
+                    <div className="alert alert-info mb-4">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <div>
+                        <div className="font-semibold">Delivery Address:</div>
+                        <div className="text-sm">{booking.deliveryAddress || 'Address not provided'}</div>
+                        <a
+                          href={`https://www.google.com/maps/dir/?api=1&destination=${booking.deliveryLocation.lat},${booking.deliveryLocation.lng}&travelmode=driving`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-sm btn-primary mt-2"
+                        >
+                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                          </svg>
+                          Navigate to Customer
+                        </a>
+                      </div>
+                    </div>
+                  )}
 
                   {booking.specialRequests && (
                     <div className="mb-4">

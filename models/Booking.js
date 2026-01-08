@@ -65,8 +65,20 @@ const bookingSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ['cash_on_pickup', 'bank_transfer'],
+    enum: ['cash_on_pickup', 'cash_on_delivery', 'bank_transfer'],
     default: 'cash_on_pickup'
+  },
+  deliveryMode: {
+    type: String,
+    enum: ['pickup', 'delivery'],
+    default: 'pickup'
+  },
+  deliveryAddress: {
+    type: String
+  },
+  deliveryLocation: {
+    lat: Number,
+    lng: Number
   },
   specialRequests: {
     type: String,

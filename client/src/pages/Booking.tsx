@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { GoogleMap, LoadScript, Marker, DirectionsRenderer } from '@react-google-maps/api';
 import api from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -18,6 +19,27 @@ interface BookedDate {
   status: string;
 }
 
+interface LatLng {
+  lat: number;
+  lng: number;
+}
+
+// Agency location - Weligama Bus Stand
+const AGENCY_LOCATION: LatLng = {
+  lat: 5.9731,
+  lng: 80.4297
+};
+
+// Weligama area boundaries (approximate)
+const WELIGAMA_BOUNDS = {
+  north: 6.0000,
+  south: 5.9500,
+  east: 80.4600,
+  west: 80.4000
+};
+
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY_HERE';
+
 const Booking: React.FC = () => {
   const { scootyId } = useParams<{ scootyId: string }>();
   const navigate = useNavigate();
@@ -27,13 +49,24 @@ const Booking: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [deliveryError, setDeliveryError] = useState('');
+  
+  const [deliveryMode, setDeliveryMode] = useState<'pickup' | 'delivery'>('pickup');
+  const [userLocation, setUserLocation] = useState<LatLng | null>(null);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [directions, setDirections] = useState<google.maps.DirectionsResult | null>(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [isLocationValid, setIsLocationValid] = useState(true);
   
   const [formData, setFormData] = useState({
     bookingType: 'hourly',
     startDate: '',
     endDate: '',
     specialRequests: '',
-    paymentMethod: 'cash_on_pickup'
+    paymentMethod: 'cash_on_pickup',
+    deliveryMode: 'pickup',
+    deliveryAddress: '',
+    deliveryLocation: { lat: 0, lng: 0 }
   });
 
   useEffect(() => {
@@ -45,7 +78,143 @@ const Booking: React.FC = () => {
     if (scootyId) {
       fetchScootyDetails();
     }
+    
+    // Get user's current location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          // Fallback to demo location in Weligama for testing on devices without GPS
+          setUserLocation({
+            lat: 5.9750, // Demo location in Weligama
+            lng: 80.4300
+          });
+          console.log('Using demo location for testing (Weligama area)');
+        }
+      );
+    } else {
+      // Browser doesn't support geolocation - use demo location
+      setUserLocation({
+        lat: 5.9750,
+        lng: 80.4300
+      });
+      console.log('Geolocation not supported. Using demo location.');
+    }
   }, [scootyId, user, navigate]);
+  
+  // Check if location is within Weligama bounds
+  const isWithinWeligama = useCallback((location: LatLng): boolean => {
+    return (
+      location.lat >= WELIGAMA_BOUNDS.south &&
+      location.lat <= WELIGAMA_BOUNDS.north &&
+      location.lng >= WELIGAMA_BOUNDS.west &&
+      location.lng <= WELIGAMA_BOUNDS.east
+    );
+  }, []);
+  
+  // Calculate and display directions
+  const calculateRoute = useCallback(async () => {
+    if (!window.google || !window.google.maps) return;
+    
+    const directionsService = new google.maps.DirectionsService();
+    
+    let origin: LatLng;
+    let destination: LatLng;
+    
+    if (deliveryMode === 'pickup') {
+      // User to Agency
+      origin = userLocation || AGENCY_LOCATION;
+      destination = AGENCY_LOCATION;
+    } else {
+      // Agency to User
+      origin = AGENCY_LOCATION;
+      destination = userLocation || AGENCY_LOCATION;
+    }
+    
+    try {
+      const results = await directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING,
+      });
+      
+      setDirections(results);
+    } catch (error) {
+      console.error('Error calculating route:', error);
+    }
+  }, [deliveryMode, userLocation]);
+  
+  useEffect(() => {
+    if (deliveryMode && userLocation) {
+      calculateRoute();
+    }
+  }, [deliveryMode, userLocation, calculateRoute]);
+  
+  // Handle delivery mode change
+  const handleDeliveryModeChange = (mode: 'pickup' | 'delivery') => {
+    setDeliveryMode(mode);
+    setDeliveryError('');
+    
+    if (mode === 'delivery') {
+      // Check if current location is within Weligama
+      if (userLocation && !isWithinWeligama(userLocation)) {
+        setDeliveryError('Delivery is only available within Weligama. Please choose Pickup.');
+        setIsLocationValid(false);
+        return;
+      }
+      setIsLocationValid(true);
+    }
+    
+    setFormData(prev => ({
+      ...prev,
+      deliveryMode: mode,
+      paymentMethod: mode === 'pickup' ? 'cash_on_pickup' : 'cash_on_delivery'
+    }));
+  };
+  
+  // Handle map click for delivery location
+  const handleMapClick = useCallback((e: google.maps.MapMouseEvent) => {
+    if (deliveryMode !== 'delivery' || !e.latLng) return;
+    
+    const clickedLocation = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng()
+    };
+    
+    // Check if clicked location is within Weligama
+    if (!isWithinWeligama(clickedLocation)) {
+      setDeliveryError('Delivery is only available within Weligama. Please select a location within the highlighted area.');
+      setIsLocationValid(false);
+      return;
+    }
+    
+    setUserLocation(clickedLocation);
+    setIsLocationValid(true);
+    setDeliveryError('');
+    
+    setFormData(prev => ({
+      ...prev,
+      deliveryLocation: clickedLocation
+    }));
+    
+    // Reverse geocode to get address
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ location: clickedLocation }, (results, status) => {
+      if (status === 'OK' && results && results[0]) {
+        setDeliveryAddress(results[0].formatted_address);
+        setFormData(prev => ({
+          ...prev,
+          deliveryAddress: results[0].formatted_address
+        }));
+      }
+    });
+  }, [deliveryMode, isWithinWeligama]);
 
   const fetchScootyDetails = async () => {
     try {
@@ -94,6 +263,38 @@ const Booking: React.FC = () => {
       [name]: value
     }));
   };
+  
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const address = e.target.value;
+    setDeliveryAddress(address);
+    
+    // Geocode the address
+    if (address.length > 5 && window.google) {
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: address + ', Weligama, Sri Lanka' }, (results, status) => {
+        if (status === 'OK' && results && results[0]) {
+          const location = {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          };
+          
+          if (isWithinWeligama(location)) {
+            setUserLocation(location);
+            setIsLocationValid(true);
+            setDeliveryError('');
+            setFormData(prev => ({
+              ...prev,
+              deliveryAddress: address,
+              deliveryLocation: location
+            }));
+          } else {
+            setDeliveryError('This address is outside Weligama. Delivery is only available within Weligama.');
+            setIsLocationValid(false);
+          }
+        }
+      });
+    }
+  };
 
   const calculateTotal = () => {
     if (!scooty || !formData.startDate || !formData.endDate) return 0;
@@ -122,6 +323,40 @@ const Booking: React.FC = () => {
       setSubmitting(false);
       return;
     }
+    
+    // Validate delivery mode
+    if (deliveryMode === 'delivery') {
+      if (!isLocationValid) {
+        setError('Please select a valid delivery location within Weligama.');
+        setSubmitting(false);
+        return;
+      }
+      
+      if (!formData.deliveryAddress || !formData.deliveryLocation.lat) {
+        setError('Please select or enter a delivery address.');
+        setSubmitting(false);
+        return;
+      }
+      
+      // For delivery mode, capture current live location
+      if (navigator.geolocation) {
+        try {
+          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: true,
+              timeout: 10000
+            });
+          });
+          
+          formData.deliveryLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+        } catch (geoError) {
+          console.error('Error getting current location:', geoError);
+        }
+      }
+    }
 
     try {
       const bookingData = {
@@ -132,7 +367,32 @@ const Booking: React.FC = () => {
       };
 
       await api.post('/api/bookings', bookingData);
-      navigate('/my-bookings');
+      
+      // Redirect based on delivery mode
+      if (deliveryMode === 'pickup') {
+        // Create Google Maps navigation URL
+        const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${AGENCY_LOCATION.lat},${AGENCY_LOCATION.lng}&travelmode=driving`;
+        
+        // Show success message
+        alert('Booking successful! Opening Google Maps for navigation to pickup location...');
+        
+        // Open Google Maps in new window
+        const mapWindow = window.open(mapsUrl, '_blank');
+        
+        // Check if popup was blocked
+        if (!mapWindow || mapWindow.closed || typeof mapWindow.closed === 'undefined') {
+          alert('Popup blocked! Please allow popups to open Google Maps automatically.\n\nYou can also use the "Get Directions" button in My Bookings.');
+        }
+        
+        // Redirect to my bookings after a delay
+        setTimeout(() => {
+          navigate('/my-bookings');
+        }, 2000);
+      } else {
+        // For delivery mode, just go to my bookings
+        alert('Booking successful! We will deliver to your location.');
+        navigate('/my-bookings');
+      }
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || 'Failed to create booking';
       const requiresProfileCompletion = err.response?.data?.requiresProfileCompletion;
@@ -188,6 +448,141 @@ const Booking: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Delivery Mode Selection */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold">How would you like to get the scooty?</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      className={`btn ${deliveryMode === 'pickup' ? 'btn-primary' : 'btn-outline'}`}
+                      onClick={() => handleDeliveryModeChange('pickup')}
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      I'll Pick It Up
+                    </button>
+                    <button
+                      type="button"
+                      className={`btn ${deliveryMode === 'delivery' ? 'btn-primary' : 'btn-outline'}`}
+                      onClick={() => handleDeliveryModeChange('delivery')}
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                      Bring It To Me
+                    </button>
+                  </div>
+                </div>
+
+                {/* Delivery Error Alert */}
+                {deliveryError && (
+                  <div className="alert alert-error">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{deliveryError}</span>
+                  </div>
+                )}
+
+                {/* Delivery Address Input */}
+                {deliveryMode === 'delivery' && (
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Delivery Address (Weligama only)</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter your address in Weligama or pin location on map"
+                      className={`input input-bordered ${!isLocationValid ? 'input-error' : ''}`}
+                      value={deliveryAddress}
+                      onChange={handleAddressChange}
+                    />
+                    <label className="label">
+                      <span className="label-text-alt text-info">
+                        💡 Click on the map below to pin your exact location
+                      </span>
+                    </label>
+                  </div>
+                )}
+
+                {/* Map Component */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-semibold">
+                      {deliveryMode === 'pickup' ? 'Route to Agency' : 'Delivery Route'}
+                    </span>
+                  </label>
+                  <div className="h-80 w-full rounded-lg overflow-hidden border-2 border-base-300">
+                    <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY}>
+                      <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '100%' }}
+                        center={deliveryMode === 'pickup' ? AGENCY_LOCATION : (userLocation || AGENCY_LOCATION)}
+                        zoom={14}
+                        onLoad={(map) => setMap(map)}
+                        onClick={handleMapClick}
+                        options={{
+                          zoomControl: true,
+                          streetViewControl: false,
+                          mapTypeControl: false,
+                          fullscreenControl: true,
+                        }}
+                      >
+                        {/* Agency Marker */}
+                        <Marker
+                          position={AGENCY_LOCATION}
+                          title="Weligama Bus Stand - Pickup Location"
+                          icon={{
+                            url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                          }}
+                        />
+                        
+                        {/* User Location Marker for Delivery */}
+                        {deliveryMode === 'delivery' && userLocation && (
+                          <Marker
+                            position={userLocation}
+                            title="Your Delivery Location"
+                            icon={{
+                              url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                            }}
+                          />
+                        )}
+                        
+                        {/* Directions */}
+                        {directions && (
+                          <DirectionsRenderer
+                            directions={directions}
+                            options={{
+                              polylineOptions: {
+                                strokeColor: deliveryMode === 'pickup' ? '#2563eb' : '#10b981',
+                                strokeWeight: 5
+                              }
+                            }}
+                          />
+                        )}
+                        
+                        {/* Weligama Boundary Visualization */}
+                        {deliveryMode === 'delivery' && (
+                          <>
+                            {/* This is a visual representation */}
+                          </>
+                        )}
+                      </GoogleMap>
+                    </LoadScript>
+                  </div>
+                  <label className="label">
+                    <span className="label-text-alt">
+                      {deliveryMode === 'pickup' 
+                        ? '🗺️ Blue marker shows Weligama Bus Stand (pickup location). Route will be shown from your current location.'
+                        : '🗺️ Red marker shows your delivery location. Blue marker is Weligama Bus Stand.'
+                      }
+                    </span>
+                  </label>
+                </div>
+                
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Booking Type</span>
@@ -276,17 +671,27 @@ const Booking: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Store Pickup Information */}
-                <div className="alert alert-info">
+                {/* Mode Information */}
+                <div className={`alert ${deliveryMode === 'pickup' ? 'alert-info' : 'alert-success'}`}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    {deliveryMode === 'pickup' ? (
+                      <>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </>
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                    )}
                   </svg>
                   <div>
-                    <h3 className="font-bold">Store Pickup Required</h3>
+                    <h3 className="font-bold">
+                      {deliveryMode === 'pickup' ? 'Agency Pickup' : 'Home Delivery'}
+                    </h3>
                     <p className="text-sm mt-1">
-                      You have to come and pick up your bike from our store. 
-                      Complete store details and Google Maps location will be sent to your email after booking confirmation.
+                      {deliveryMode === 'pickup' 
+                        ? 'You will pick up your scooty from Weligama Bus Stand. The map shows the route from your location to the bus stand. Exact meeting point details will be sent to your email.'
+                        : 'We will deliver the scooty to your location in Weligama. Our delivery person will contact you 30 minutes before arrival.'
+                      }
                     </p>
                   </div>
                 </div>
@@ -302,12 +707,14 @@ const Booking: React.FC = () => {
                     onChange={handleChange}
                     required
                   >
-                    <option value="cash_on_pickup">Cash on Pickup</option>
-                    <option value="bank_transfer">Bank Transfer</option>
+                    <option value={deliveryMode === 'pickup' ? 'cash_on_pickup' : 'cash_on_delivery'}>
+                      Cash on {deliveryMode === 'pickup' ? 'Pickup' : 'Delivery'}
+                    </option>
+                    <option value="bank_transfer">Bank Transfer (Advance Payment)</option>
                   </select>
                   <div className="label">
                     <span className="label-text-alt text-info">
-                      💡 Payment will be collected physically, not online
+                      💡 Payment will be collected {deliveryMode === 'pickup' ? 'when you pick up the scooty' : 'at the time of delivery'}
                     </span>
                   </div>
                 </div>
@@ -349,6 +756,20 @@ const Booking: React.FC = () => {
                   <span className="text-base-content/70">Scooty</span>
                   <span className="font-semibold">{scooty.brand} {scooty.model}</span>
                 </div>
+                
+                <div className="flex justify-between">
+                  <span className="text-base-content/70">Delivery Mode</span>
+                  <span className="font-semibold capitalize">
+                    {deliveryMode === 'pickup' ? 'Agency Pickup' : 'Home Delivery'}
+                  </span>
+                </div>
+                
+                {deliveryMode === 'delivery' && deliveryAddress && (
+                  <div className="flex justify-between">
+                    <span className="text-base-content/70">Delivery Address</span>
+                    <span className="font-semibold text-sm text-right">{deliveryAddress}</span>
+                  </div>
+                )}
                 
                 <div className="flex justify-between">
                   <span className="text-base-content/70">Booking Type</span>
@@ -395,7 +816,7 @@ const Booking: React.FC = () => {
                     <div>
                       <h3 className="font-bold">Payment Information</h3>
                       <div className="text-sm mt-1">
-                        Payment will be collected physically when you {formData.paymentMethod === 'cash_on_pickup' ? 'pick up' : 'receive'} the scooty.
+                        Payment will be collected {deliveryMode === 'pickup' ? 'when you pick up' : 'when we deliver'} the scooty.
                         No online payment is required.
                       </div>
                     </div>

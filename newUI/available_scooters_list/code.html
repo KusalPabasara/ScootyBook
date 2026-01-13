@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Weligama Scooters - Available Bikes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0EA5E9", // Sky blue for a coastal/tourist vibe
+              "primary-dark": "#0284C7",
+              "background-light": "#F3F4F6", // Gray-100
+              "background-dark": "#111827", // Gray-900
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#1F2937", // Gray-800
+              "text-light": "#1F2937",
+              "text-dark": "#F9FAFB",
+            },
+            fontFamily: {
+              display: ["Poppins", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.75rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200 min-h-screen flex flex-col">
+<nav class="bg-surface-light dark:bg-surface-dark shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<div class="flex items-center">
+<span class="material-icons-round text-primary text-3xl mr-2">two_wheeler</span>
+<span class="font-bold text-xl tracking-tight">Weligama<span class="text-primary">Rides</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium" href="#">Home</a>
+<a class="text-primary font-semibold px-3 py-2 rounded-md text-sm" href="#">Bikes</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium" href="#">About</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium" href="#">Contact</a>
+<button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">Login</button>
+</div>
+<div class="flex items-center md:hidden">
+<button class="text-gray-600 dark:text-gray-300 hover:text-primary focus:outline-none">
+<span class="material-icons-round">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white">Available Scooters</h1>
+<p class="mt-2 text-gray-600 dark:text-gray-400">Find the perfect ride for your Weligama adventure.</p>
+</div>
+<div class="bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg px-4 py-2 flex items-center text-yellow-800 dark:text-yellow-200">
+<span class="material-icons-round mr-2 text-xl">payments</span>
+<span class="font-medium text-sm">Cash on Delivery Only</span>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-semibold">Filters</h2>
+<span class="material-icons-round text-gray-400">filter_list</span>
+</div>
+<div class="mb-6">
+<label class="sr-only" for="search">Search</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-round text-gray-400 text-sm">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white" id="search" name="search" placeholder="Search model..." type="text"/>
+</div>
+</div>
+<div class="mb-6">
+<h3 class="text-sm font-medium text-gray-900 dark:text-white mb-3">Price Range (Daily)</h3>
+<div class="space-y-2">
+<label class="flex items-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">Under 1500 LKR</span>
+</label>
+<label class="flex items-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">1500 - 2500 LKR</span>
+</label>
+<label class="flex items-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">Above 2500 LKR</span>
+</label>
+</div>
+</div>
+<div class="mb-6">
+<h3 class="text-sm font-medium text-gray-900 dark:text-white mb-3">Bike Type</h3>
+<div class="space-y-2">
+<label class="flex items-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">Scooter (110cc)</span>
+</label>
+<label class="flex items-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">Premium (125cc+)</span>
+</label>
+<label class="flex items-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4 bg-gray-100 dark:bg-gray-700 dark:border-gray-600" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-600 dark:text-gray-300">Electric</span>
+</label>
+</div>
+</div>
+<button class="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Reset Filters
+                    </button>
+</div>
+</aside>
+<div class="flex-grow">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col group">
+<div class="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="Honda Dio Scooter Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdf4t53_C63J6bO2WHWF3gRp1cazOZlMrP_YB5wlm2lmg2a9g-_KlkVROHL4Z21SEUi3Y4qXykcPf9SONQcd8InFuUQnsdVqFs0qunNi3LK88ivWc2xM8Cgx6XSFUyOGGwjv_q0Otvg1dc-QMod0qaHnfO4kNVLiqHerPdM-DRlHHlpspiI6DQicOynsdC9Oxl9mJDfohHAlPP_Hndhgr0rk5BfgkO8rxi-QgTPUVNxotO5ho0q0RiDEawURiW0JYSJs5bsvJQ2LN9"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Available</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Honda Dio</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Standard Edition</p>
+</div>
+<div class="text-right">
+<span class="block text-xl font-bold text-primary">LKR 1,800</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex items-center gap-4 my-4 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center" title="Engine Capacity">
+<span class="material-icons-round text-lg mr-1 text-gray-400">speed</span>
+                                    110cc
+                                </div>
+<div class="flex items-center" title="Transmission">
+<span class="material-icons-round text-lg mr-1 text-gray-400">settings</span>
+                                    Auto
+                                </div>
+<div class="flex items-center" title="Fuel">
+<span class="material-icons-round text-lg mr-1 text-gray-400">local_gas_station</span>
+                                    Petrol
+                                </div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col group">
+<div class="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="Yamaha RayZR Scooter Blue" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD7iFD-lOwQFQY4g4H2DxeiTPoW03JTvkAol0IQG_EC8O8S0EP2RCegtnU9D7NZeN0NR6628je4fVo3VVtavxE1zfZeH845D5t-uJP8EnHPhJw_Au56z9J_0Rnl6dsYDj8EZU7WRfQhyp3c6rQvw74EBfyKwaQTTORZWmFQllQA54z8cbgylz7cSvB9RMKD5Xlbqkrn0Mn1zJwqevdLCBt3-nUD_JC13-86qQqZNF6XOv5O3PSSb2LLmj31_VOkSt9iK3fnf1hYWtL"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Available</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Yamaha RayZR</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Street Rally</p>
+</div>
+<div class="text-right">
+<span class="block text-xl font-bold text-primary">LKR 2,200</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex items-center gap-4 my-4 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center" title="Engine Capacity">
+<span class="material-icons-round text-lg mr-1 text-gray-400">speed</span>
+                                    125cc
+                                </div>
+<div class="flex items-center" title="Transmission">
+<span class="material-icons-round text-lg mr-1 text-gray-400">settings</span>
+                                    Auto
+                                </div>
+<div class="flex items-center" title="Fuel">
+<span class="material-icons-round text-lg mr-1 text-gray-400">local_gas_station</span>
+                                    Petrol
+                                </div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col group">
+<div class="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="TVS Ntorq Yellow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8TMPDNrJrHz17-7FVvF7tL6aRGU7pgKUN8mSImubrseWZChsJ6IRbIt4VUrPcVY2a3oPUWddV0zORKRr87wgMrAMCvZ3vh_Y2LFZUWqmJzlfQXI5CtN4c64LFL19SukvhJFpRuUwRA-95MSi3uvg8d1X4rqjgq6kceo6Y-wupK5RvZlj2dbAyTm0oUg9bIvfUL-ffIMvLXVxQG3PpL7g3Bxafsj48IqN7MzgAoDLBQPZ5lzqONU3Omf9rVanzoIywahj8XqDdffTn"/>
+<div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Rented</div>
+<div class="absolute inset-0 bg-white/30 dark:bg-black/40 backdrop-blur-[1px]"></div>
+</div>
+<div class="p-5 flex flex-col flex-grow relative opacity-75">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">TVS Ntorq</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Race Edition</p>
+</div>
+<div class="text-right">
+<span class="block text-xl font-bold text-primary">LKR 2,500</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex items-center gap-4 my-4 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center" title="Engine Capacity">
+<span class="material-icons-round text-lg mr-1 text-gray-400">speed</span>
+                                    125cc
+                                </div>
+<div class="flex items-center" title="Transmission">
+<span class="material-icons-round text-lg mr-1 text-gray-400">settings</span>
+                                    Auto
+                                </div>
+<div class="flex items-center" title="Fuel">
+<span class="material-icons-round text-lg mr-1 text-gray-400">local_gas_station</span>
+                                    Petrol
+                                </div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+<button class="w-full bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 font-medium py-2.5 rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled="">
+<span class="material-icons-round text-sm">block</span>
+                                    Unavailable
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col group">
+<div class="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="Honda Grazia Black" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbHfZPInOWH1qgPRx7fHHR7b5dgs2QduLXpO2VcLy280Ys1LlzgVBM8XWdVGG4brVYv93B845LIJUCe73p0w92LdXkmkVzT3FzSwEjI3fkAZ2u-h9jeI_3xiJLBiH_BidxGXwbBd-YMGnd9waXxbLdwlFvBHlS9cygEFbBbjAkBOgsEkJo6yi1qdljK9PJbtaG2jf85eOO5R222DtrK69bT2dI8YfoLoh6eKIDlfh7BdYcLTqY0xtwlxFhEvBZbPMSdyIfNeCHlfvV"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Available</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Honda Grazia</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">BS6 Model</p>
+</div>
+<div class="text-right">
+<span class="block text-xl font-bold text-primary">LKR 2,000</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex items-center gap-4 my-4 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center" title="Engine Capacity">
+<span class="material-icons-round text-lg mr-1 text-gray-400">speed</span>
+                                    125cc
+                                </div>
+<div class="flex items-center" title="Transmission">
+<span class="material-icons-round text-lg mr-1 text-gray-400">settings</span>
+                                    Auto
+                                </div>
+<div class="flex items-center" title="Fuel">
+<span class="material-icons-round text-lg mr-1 text-gray-400">local_gas_station</span>
+                                    Petrol
+                                </div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col group">
+<div class="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="Hero Pleasure Plus" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjwWSprkoS9aT0g5C-r1Is6MgdmSYp591-XZie9nyJP46ur1ajtpNH1gO9tujV_oa4BSgv8QCaoU9EVLUlSolOj0mGRkI1gLdCFObBEDN4L3hEbvQVdahcDrTPfVGLhGY74DQfAWG_zwa4Y3MXjxXi0SEkbouqd6mLqub27mmmxNk9o8P1wDuKdksWLcXbAygJq-QHrCdR_TcnDqtUSyXk48C4PYFordLKIv2EWx5G_JUEutwYHO-YmTdtagBXuTTW__9_UarWK4qR"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Available</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Hero Pleasure+</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Xtec</p>
+</div>
+<div class="text-right">
+<span class="block text-xl font-bold text-primary">LKR 1,600</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex items-center gap-4 my-4 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center" title="Engine Capacity">
+<span class="material-icons-round text-lg mr-1 text-gray-400">speed</span>
+                                    110cc
+                                </div>
+<div class="flex items-center" title="Transmission">
+<span class="material-icons-round text-lg mr-1 text-gray-400">settings</span>
+                                    Auto
+                                </div>
+<div class="flex items-center" title="Fuel">
+<span class="material-icons-round text-lg mr-1 text-gray-400">local_gas_station</span>
+                                    Petrol
+                                </div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 flex justify-center">
+<nav class="flex items-center space-x-2">
+<button class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface-light dark:bg-surface-dark text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50">
+<span class="material-icons-round text-sm">chevron_left</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium">1</button>
+<button class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface-light dark:bg-surface-dark text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium">2</button>
+<button class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface-light dark:bg-surface-dark text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium">3</button>
+<button class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface-light dark:bg-surface-dark text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700">
+<span class="material-icons-round text-sm">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700 mt-auto">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Weligama Rides</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Explore the southern coast of Sri Lanka on your own terms. Affordable and reliable scooter rentals.</p>
+</div>
+<div>
+<h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Contact</h3>
+<ul class="space-y-3">
+<li class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+<span class="material-icons-round text-primary text-lg mr-2">phone</span>
+                            +94 77 123 4567
+                        </li>
+<li class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+<span class="material-icons-round text-primary text-lg mr-2">email</span>
+                            bookings@weligamarides.com
+                        </li>
+</ul>
+</div>
+<div>
+<h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Legal</h3>
+<ul class="space-y-2">
+<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Terms &amp; Conditions</a></li>
+<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8 text-center">
+<p class="text-sm text-gray-400">© 2023 Weligama Rides. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<button class="fixed bottom-6 right-6 p-3 rounded-full bg-primary text-white shadow-lg hover:bg-primary-dark transition-colors z-50" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round">brightness_6</span>
+</button>
+
+</body></html>

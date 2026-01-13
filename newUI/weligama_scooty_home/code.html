@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Weligama Scooty Home - Bike Rental</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0EA5E9", // Ocean blue suitable for Weligama
+                        secondary: "#F59E0B", // Sunny yellow accent
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#0F172A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>.hero-pattern {
+    background-color: #0EA5E9;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCX9Og7sB-si4j1EWcoFmi2T2B-tfH2Cw1IncBWQYG96C49ZQGFwSOhOG7GrdBy2ddsBfB1cbBplfqGyWJIYt11ZI4-A5xo30gDdOAex-9I4GjRnj0_iB4aFnrV40OMqoBJLEixfs_l0tN0uOJ2xiXhygTnEiu2sXiND3bTDSTN9-aM-SLMalhOQxOvInVMJhsKYLkYbg9i3miiLyroa4Np51SBrriaYNjnlCU9O2V6peBOu_dBUw0CmpDStF_f6I3sg-QCcZcHbFeW)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+<nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+<div class="flex-shrink-0 flex items-center">
+<span class="material-icons-outlined text-primary text-3xl mr-2">two_wheeler</span>
+<span class="font-display font-bold text-2xl text-slate-900 dark:text-white">Weligama<span class="text-primary">Scooty</span></span>
+</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#bikes">Bikes</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#process">How it Works</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#about">About</a>
+<button class="bg-primary hover:bg-sky-600 text-white px-5 py-2.5 rounded-full font-medium transition-transform transform hover:scale-105 shadow-lg shadow-primary/30">
+                        Contact Us
+                    </button>
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined">dark_mode</span>
+</button>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-slate-600 dark:text-slate-300 hover:text-primary">
+<span class="material-icons-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Beautiful tropical road in Sri Lanka with palm trees" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSH2wctCyEIdYL3kwgLKclOFKriGK8ARt63rBgbakx4NdfI1MDRJfry9_S9Ou_4-6rKK5RorE5m02LuNDr1lSKFWLB1RY3QzusvExAYoxyl6-xEYc8U-VAXOuR5QeV4QvzuEf0EApqRnJJ74d48K0RGvUGK04tOdj88wRMDCYbTCE5Zls0Ioci1ZPgWLI3vK61I_YQE1PYsFDQgOmhtKS7YLUHc1H9_iuJyo3s30IgIoXSRPkmLDS0k8CJ4QfVd9hjKhAZYZ871NDH"/>
+<div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40 dark:from-slate-950/90 dark:to-slate-900/60"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="text-white">
+<div class="inline-flex items-center bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 mb-6">
+<span class="flex h-2 w-2 rounded-full bg-green-400 mr-2"></span>
+<span class="text-sm font-medium tracking-wide">Available Now in Weligama</span>
+</div>
+<h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                        Explore Weligama on <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-primary">Two Wheels</span>
+</h1>
+<p class="text-lg md:text-xl text-slate-200 mb-8 max-w-lg leading-relaxed">
+                        Skip the traffic and feel the breeze. Premium scooters delivered directly to your hotel or villa. Easy booking, honest prices.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="inline-flex justify-center items-center bg-primary hover:bg-sky-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-primary/40 hover:shadow-primary/60 transform hover:-translate-y-1" href="#bikes">
+                            Browse Bikes
+                            <span class="material-icons-outlined ml-2">arrow_forward</span>
+</a>
+<a class="inline-flex justify-center items-center bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:border-white" href="tel:+94771234567">
+<span class="material-icons-outlined mr-2">call</span>
+                            Call Now
+                        </a>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-700 lg:ml-auto w-full max-w-md transform transition-all hover:scale-[1.01]">
+<h3 class="text-xl font-bold text-slate-800 dark:text-white mb-6 flex items-center">
+<span class="material-icons-outlined text-primary mr-2">search</span>
+                        Find Your Ride
+                    </h3>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">Pick-up Date</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-outlined text-gray-400">calendar_today</span>
+</span>
+<input class="pl-10 block w-full rounded-lg border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary" type="date"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">Drop-off Date</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-outlined text-gray-400">event</span>
+</span>
+<input class="pl-10 block w-full rounded-lg border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary" type="date"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">Bike Type</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-outlined text-gray-400">moped</span>
+</span>
+<select class="pl-10 block w-full rounded-lg border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary">
+<option>Standard Scooty (110cc)</option>
+<option>Premium Scooty (125cc)</option>
+<option>Motorbike (Manual)</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-secondary hover:bg-amber-600 text-white font-bold py-3.5 px-4 rounded-xl transition-colors shadow-lg shadow-secondary/30 flex justify-center items-center mt-2" type="submit">
+                            Check Availability
+                        </button>
+</form>
+<p class="text-xs text-center text-slate-500 dark:text-slate-400 mt-4 flex items-center justify-center">
+<span class="material-icons-outlined text-sm mr-1 text-green-500">verified</span>
+                        No hidden fees. Pay on arrival.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white dark:bg-slate-900">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-primary font-semibold tracking-wider uppercase text-sm">Our Promise</span>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">Why Rent With Us?</h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg">We provide more than just a bike; we provide the freedom to explore the southern coast with peace of mind.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-background-light dark:bg-slate-800 p-8 rounded-2xl transition-all hover:-translate-y-2 hover:shadow-xl border border-transparent hover:border-primary/20 group">
+<div class="w-14 h-14 bg-blue-100 dark:bg-slate-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-icons-outlined text-primary text-3xl group-hover:text-white transition-colors">local_shipping</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Free Delivery</h3>
+<p class="text-slate-600 dark:text-slate-400">We bring the bike to your doorstep anywhere in Weligama area. Just let us know your location.</p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-8 rounded-2xl transition-all hover:-translate-y-2 hover:shadow-xl border border-transparent hover:border-primary/20 group">
+<div class="w-14 h-14 bg-blue-100 dark:bg-slate-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-icons-outlined text-primary text-3xl group-hover:text-white transition-colors">support_agent</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">24/7 Roadside Support</h3>
+<p class="text-slate-600 dark:text-slate-400">Flat tire? Out of gas? Our local team is just a phone call away to help you get back on the road.</p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-8 rounded-2xl transition-all hover:-translate-y-2 hover:shadow-xl border border-transparent hover:border-primary/20 group">
+<div class="w-14 h-14 bg-blue-100 dark:bg-slate-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-icons-outlined text-primary text-3xl group-hover:text-white transition-colors">payments</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Cash on Delivery</h3>
+<p class="text-slate-600 dark:text-slate-400">No credit card required for booking. Inspect the bike first, then pay securely upon handover.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-slate-950 relative overflow-hidden" id="bikes">
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Popular Choices</h2>
+<p class="text-slate-600 dark:text-slate-400">Clean, maintained, and ready to ride.</p>
+</div>
+<a class="hidden md:flex items-center text-primary font-semibold hover:text-sky-600 transition-colors" href="#">
+                    View Full Fleet <span class="material-icons-outlined ml-1">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-slate-800 flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
+<img alt="Honda Dio Scooter Red" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_9EiJ8oQsfUbDZFNXIzthcl6J0VHFChdLJk46QDaE1Wgr6NJjdSmneMMokspO5QElo2nkVLyt8Y8isEB_W3MhPaCwz3hmm-3iWxpb8aywru5bl2w7kwgDy6WmLb6NMrcoz_qsNMOgDLbizZqi-FHuJu8WvxM4abeSs2v2VNTIgnUaF3PqVSWM51q8eqe67KHwGQcAn_Pf1qzY7yqMt56t_s--q8zz5ibiUHvIpmSSz7lX5AQTnnussCddjJwn_1lR503huluH7ahN"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full shadow-sm text-slate-800 dark:text-slate-200">
+                            Automatic
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Honda Dio</h3>
+<div class="flex items-center text-yellow-400 text-sm font-bold">
+<span class="material-icons-outlined text-base mr-1">star</span>
+                                4.9
+                            </div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Reliable, lightweight, and perfect for city cruising and beach hopping.</p>
+<div class="grid grid-cols-2 gap-2 mb-6">
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">local_gas_station</span> 50 km/l
+                            </div>
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">speed</span> 110cc
+                            </div>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-800">
+<div>
+<span class="text-sm text-slate-500 dark:text-slate-400">Daily Rate</span>
+<div class="text-primary font-bold text-xl">$5.00</div>
+</div>
+<button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg font-medium text-sm hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
+                                Book Now
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-slate-800 flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
+<img alt="Yamaha NMax Scooter" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXLRF2TRUIOXVK21Xa1WxN89-mGbRyBKYlIuX0rwPlDtxZG74cbc-wRpOMRshVGYxZepihmg0Lggw7bbvsUFkzyfLcFTGj7p3Url__Qi_m5f2U0NMABgdjCBF1qg-2oDgnBduQCZWlHwAfRZzgI-WvBViVU25k_S1l-6p72j_-YrE0gzAJyLS8A1q8DRxzQyQ2130O0tDxS4rXLptq7VrId0yulaBYN_HcwLYac8rZ4WcJ6rWHsyTBW1A-vGyNlNm_q48hAkvc7L12"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full shadow-sm text-slate-800 dark:text-slate-200">
+                            Premium
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Yamaha NMAX</h3>
+<div class="flex items-center text-yellow-400 text-sm font-bold">
+<span class="material-icons-outlined text-base mr-1">star</span>
+                                5.0
+                            </div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Maximum comfort with extra storage and power for longer trips.</p>
+<div class="grid grid-cols-2 gap-2 mb-6">
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">local_gas_station</span> 45 km/l
+                            </div>
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">speed</span> 155cc
+                            </div>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-800">
+<div>
+<span class="text-sm text-slate-500 dark:text-slate-400">Daily Rate</span>
+<div class="text-primary font-bold text-xl">$8.00</div>
+</div>
+<button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg font-medium text-sm hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
+                                Book Now
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-slate-800 flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-slate-800">
+<img alt="TVS Wego Scooter" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfJKo6vq1_W1yj4M9zKkDbpuqlMUukZm6CjSk3bdmJhhted_5EmnHMdejH8XcbHC7PRtavhqwgJR6jKLFMUow-st_vy8mb6fASRvy7ysbOQQqiz1hvRz9yFX5ds5m8FuW2dztRoXqSeyypQdoCRkEVUpZggO22oEaEJpuQUztT15pNDpNwK6dicAidEiojTnWhaOj-tN4h6CtHlSDxZ-V-o7kkGSLKfduRgx_30hkoffYzpodNCiMplD-Reo9EWOWR56tuRfwtbnfl"/>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full shadow-sm text-slate-800 dark:text-slate-200">
+                            Economic
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">TVS Wego</h3>
+<div class="flex items-center text-yellow-400 text-sm font-bold">
+<span class="material-icons-outlined text-base mr-1">star</span>
+                                4.7
+                            </div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Budget-friendly option with great balance and easy handling.</p>
+<div class="grid grid-cols-2 gap-2 mb-6">
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">local_gas_station</span> 55 km/l
+                            </div>
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 px-3 py-2 rounded-lg">
+<span class="material-icons-outlined text-base mr-2">speed</span> 110cc
+                            </div>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-800">
+<div>
+<span class="text-sm text-slate-500 dark:text-slate-400">Daily Rate</span>
+<div class="text-primary font-bold text-xl">$4.50</div>
+</div>
+<button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg font-medium text-sm hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
+                                Book Now
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 text-center md:hidden">
+<a class="inline-flex items-center text-primary font-semibold hover:text-sky-600 transition-colors" href="#">
+                    View Full Fleet <span class="material-icons-outlined ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white dark:bg-slate-900" id="process">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Simple Booking Process</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">From selection to return, we've streamlined the experience so you can focus on enjoying your trip.</p>
+</div>
+<div class="relative">
+<div class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 dark:bg-slate-700 -translate-y-1/2 z-0"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+<div class="bg-background-light dark:bg-slate-800 p-6 rounded-2xl text-center border border-gray-100 dark:border-slate-700 shadow-lg lg:shadow-none hover:shadow-xl transition-all">
+<div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white dark:border-slate-800 shadow-md">1</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Choose Bike</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Browse our fleet and pick the perfect ride for your adventure.</p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-6 rounded-2xl text-center border border-gray-100 dark:border-slate-700 shadow-lg lg:shadow-none hover:shadow-xl transition-all">
+<div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white dark:border-slate-800 shadow-md">2</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Book &amp; Confirm</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Send an enquiry or call us. We confirm availability instantly.</p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-6 rounded-2xl text-center border border-gray-100 dark:border-slate-700 shadow-lg lg:shadow-none hover:shadow-xl transition-all">
+<div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white dark:border-slate-800 shadow-md">3</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Delivery or Pickup</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">We drop it off at your location, or you visit our shop.</p>
+</div>
+<div class="bg-background-light dark:bg-slate-800 p-6 rounded-2xl text-center border border-gray-100 dark:border-slate-700 shadow-lg lg:shadow-none hover:shadow-xl transition-all">
+<div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white dark:border-slate-800 shadow-md">4</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Ride &amp; Return</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Enjoy Weligama! Pay cash upon handover and return easily.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 bg-primary">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between bg-primary rounded-3xl p-8 md:p-12 relative overflow-hidden">
+<div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10 mb-8 md:mb-0 text-center md:text-left">
+<h2 class="text-3xl font-display font-bold text-white mb-2">Ready to hit the road?</h2>
+<p class="text-white/80 text-lg">Book your scooty today and discover the hidden gems of Weligama.</p>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row gap-4">
+<button class="bg-white text-primary font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all transform hover:-translate-y-1">
+                        Book Now
+                    </button>
+<button class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-xl hover:bg-white/10 transition-colors">
+                        Contact via WhatsApp
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-background-dark text-white pt-16 pb-8 border-t border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+<div>
+<div class="flex items-center mb-6">
+<span class="material-icons-outlined text-primary text-3xl mr-2">two_wheeler</span>
+<span class="font-display font-bold text-2xl">Weligama<span class="text-primary">Scooty</span></span>
+</div>
+<p class="text-slate-400 mb-6">The most reliable bike rental service in the Southern Province. We make your travel experience smooth and memorable.</p>
+<div class="flex space-x-4">
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><i class="material-icons-outlined">facebook</i></a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">camera_alt</a> 
+<a class="text-slate-400 hover:text-white transition-colors" href="#">alternate_email</a> 
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-6 text-white">Quick Links</h3>
+<ul class="space-y-4">
+<li><a class="text-slate-400 hover:text-primary transition-colors" href="#">Home</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors" href="#bikes">Our Fleet</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors" href="#process">How it Works</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors" href="#about">About Us</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-6 text-white">Contact Us</h3>
+<ul class="space-y-4">
+<li class="flex items-start">
+<span class="material-icons-outlined text-primary mr-3 mt-1">location_on</span>
+<span class="text-slate-400">123 Beach Road, Weligama, Sri Lanka</span>
+</li>
+<li class="flex items-center">
+<span class="material-icons-outlined text-primary mr-3">phone</span>
+<span class="text-slate-400">+94 77 123 4567</span>
+</li>
+<li class="flex items-center">
+<span class="material-icons-outlined text-primary mr-3">email</span>
+<span class="text-slate-400">hello@weligamascooty.com</span>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-6 text-white">Newsletter</h3>
+<p class="text-slate-400 mb-4">Subscribe for latest offers and travel tips.</p>
+<form class="flex flex-col gap-3">
+<input class="bg-slate-800 border-none rounded-lg py-3 px-4 text-white focus:ring-2 focus:ring-primary placeholder-slate-500" placeholder="Your email address" type="email"/>
+<button class="bg-primary hover:bg-sky-600 text-white font-bold py-3 rounded-lg transition-colors" type="submit">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+<p>© 2023 Weligama Scooty Home. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

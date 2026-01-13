@@ -3,194 +3,208 @@ import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   return (
-    <div className="min-h-screen bg-base-200">
-      {/* Hero Section */}
-      <div className="hero min-h-[80vh] bg-primary">
-        <div className="hero-content text-center text-primary-content">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex justify-center mb-6">
-              <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="6" cy="18" r="3" strokeWidth="2" />
-                <circle cx="18" cy="18" r="3" strokeWidth="2" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18h12M9 18V8l3-2h5l2 4M14 10h4" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6h2v2h-2z" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <Link to="/" className="flex items-center gap-2">
+              <svg className="w-8 h-8 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.36 9.36l.57 4.32H5.07l.57-4.32M6.9 18c-.66 0-1.2.54-1.2 1.2S6.24 20.4 6.9 20.4s1.2-.54 1.2-1.2-.54-1.2-1.2-1.2m10.2 0c-.66 0-1.2.54-1.2 1.2s.54 1.2 1.2 1.2 1.2-.54 1.2-1.2-.54-1.2-1.2-1.2M5 9h14V6H5v3z"/>
               </svg>
-            </div>
-            <h1 className="text-6xl font-bold mb-6">
-              ScootyBook
-            </h1>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Rent scooties for your daily commute or weekend adventures.
-              Find the perfect ride near you with our easy-to-use platform!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/scooties" className="btn btn-secondary btn-lg flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                Browse Scooties
-              </Link>
-              <Link to="/register" className="btn btn-outline btn-lg flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
-                Get Started
+              <span className="font-bold text-2xl text-slate-900 dark:text-white">
+                Scooty<span className="text-sky-600">Book</span>
+              </span>
+            </Link>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#" className="text-slate-600 dark:text-slate-300 hover:text-sky-600 font-medium transition">Home</a>
+              <a href="#features" className="text-slate-600 dark:text-slate-300 hover:text-sky-600 font-medium transition">Features</a>
+              <a href="#pricing" className="text-slate-600 dark:text-slate-300 hover:text-sky-600 font-medium transition">Pricing</a>
+              <Link to="/login" className="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2.5 rounded-full font-medium shadow-lg transition">
+                Login
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img alt="Tropical beach road in Weligama" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40 dark:from-slate-950/90 dark:to-slate-900/60"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-white">
+              <div className="inline-flex items-center bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 mb-6">
+                <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2"></span>
+                <span className="text-sm font-medium tracking-wide">Available Now in Weligama</span>
+              </div>
+              
+              <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
+                Explore Weligama on <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-400">Two Wheels</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-lg leading-relaxed">
+                Skip the traffic and feel the breeze. Premium scooters delivered directly to your hotel or villa. Easy booking, honest prices.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/scooties" className="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-sky-600/40 hover:shadow-sky-600/60 transform hover:-translate-y-1">
+                  Browse Bikes
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+                <a href="tel:+94771234567" className="inline-flex justify-center items-center bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:border-white">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  Call Now
+                </a>
+              </div>
+            </div>
+
+            {/* Booking Card */}
+            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 lg:ml-auto w-full max-w-md transform transition-all hover:scale-[1.02]">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-sky-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M21 21H3V5h18m-7-4v2M10 3v2M7 11h10M7 15h10M7 19h4" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+                Quick Booking
+              </h3>
+              
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Pickup Date</label>
+                  <input type="date" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Return Date</label>
+                  <input type="date" className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none" />
+                </div>
+                <Link to="/scooties" className="w-full bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-lg text-center block">
+                  Search Bikes
+                </Link>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
-      <div className="py-20 bg-base-100">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <h2 className="text-4xl font-bold text-center mb-16">Why Choose ScootyBook?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="card bg-base-200 shadow-xl card-hover max-w-sm mx-auto">
-              <div className="card-body text-center p-6">
-                <svg className="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <h3 className="card-title justify-center mb-4 text-xl">Fast & Easy</h3>
-                <p className="text-base-content/70 text-sm leading-relaxed">
-                  Book your scooty in minutes with our streamlined process.
-                  No complicated forms or lengthy procedures.
-                </p>
+      <section id="features" className="py-20 bg-white dark:bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Choose ScootyBook?</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">Everything you need for a perfect rental experience</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-sky-50 dark:from-sky-950/20 to-transparent border border-sky-100 dark:border-sky-900 hover:border-sky-300 dark:hover:border-sky-700 transition-all">
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-sky-100 dark:bg-sky-900 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg className="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Lightning Fast</h3>
+                <p className="text-slate-600 dark:text-slate-400">Book your bike in just 60 seconds. No paperwork, no hassle.</p>
               </div>
             </div>
 
-            <div className="card bg-base-200 shadow-xl card-hover max-w-sm mx-auto">
-              <div className="card-body text-center p-6">
-                <svg className="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <h3 className="card-title justify-center mb-4 text-xl">Safe & Secure</h3>
-                <p className="text-base-content/70 text-sm leading-relaxed">
-                  All scooties are verified and maintained.
-                  Your safety and security are our top priorities.
-                </p>
+            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-sky-50 dark:from-sky-950/20 to-transparent border border-sky-100 dark:border-sky-900 hover:border-sky-300 dark:hover:border-sky-700 transition-all">
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-sky-100 dark:bg-sky-900 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg className="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Verified Fleet</h3>
+                <p className="text-slate-600 dark:text-slate-400">All bikes are regularly maintained and safety checked.</p>
               </div>
             </div>
 
-            <div className="card bg-base-200 shadow-xl card-hover max-w-sm mx-auto">
-              <div className="card-body text-center p-6">
-                <svg className="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-                <h3 className="card-title justify-center mb-4 text-xl">Best Prices</h3>
-                <p className="text-base-content/70 text-sm leading-relaxed">
-                  Competitive rates for hourly and daily rentals.
-                  Get the best value for your money.
-                </p>
+            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-sky-50 dark:from-sky-950/20 to-transparent border border-sky-100 dark:border-sky-900 hover:border-sky-300 dark:hover:border-sky-700 transition-all">
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-sky-100 dark:bg-sky-900 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg className="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-12C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Best Prices</h3>
+                <p className="text-slate-600 dark:text-slate-400">Competitive rates for daily or hourly rentals. Transparent pricing.</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* CTA Section */}
-      <div className="py-20 bg-primary text-primary-content">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h2 className="text-4xl font-bold mb-8">Ready to Start Your Journey?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust ScootyBook for their transportation needs.
-          </p>
+      <section className="py-20 bg-gradient-to-r from-sky-600 to-sky-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Ready to Explore Weligama?</h2>
+          <p className="text-xl text-sky-100 mb-10 max-w-2xl mx-auto">Start your adventure today with our premium scooter rental service.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/scooties" className="btn btn-secondary btn-lg">
-              Browse Available Scooties
+            <Link to="/scooties" className="bg-white hover:bg-slate-50 text-sky-600 px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-lg">
+              Browse Scooters
             </Link>
-            <Link to="/register" className="btn btn-outline btn-lg">
-              Create Your Account
+            <Link to="/register" className="bg-sky-700 hover:bg-sky-800 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all border-2 border-sky-400">
+              Create Account
             </Link>
           </div>
         </div>
-      </div>
-
-      {/* Store Location Section */}
-      <div className="py-20 bg-base-100">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <h2 className="text-4xl font-bold text-center mb-16">Visit Our Store</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Store Information */}
-            <div className="space-y-6">
-              <div className="card bg-base-200 shadow-xl">
-                <div className="card-body">
-                  <h3 className="card-title text-2xl mb-4">ScootyBook Store</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <svg className="w-6 h-6 mt-1 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <div>
-                        <p className="font-semibold">Address</p>
-                        <p className="text-base-content/70">123 Main Street, Colombo 03, Sri Lanka</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-3">
-                      <svg className="w-6 h-6 mt-1 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <div>
-                        <p className="font-semibold">Phone</p>
-                        <p className="text-base-content/70">+94 11 234 5678</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-3">
-                      <svg className="w-6 h-6 mt-1 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <div>
-                        <p className="font-semibold">Hours</p>
-                        <p className="text-base-content/70">Mon-Sun: 8:00 AM - 8:00 PM</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6">
-                    <a 
-                      href="https://maps.google.com/?q=123+Main+Street+Colombo+03+Sri+Lanka" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="btn btn-primary btn-lg w-full"
-                    >
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7" />
-                      </svg>
-                      Open in Google Maps
-                    </a>
-                  </div>
-                </div>
-              </div>
+      </section>
+      {/* Footer */}
+      <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300 py-12 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <Link to="/" className="flex items-center gap-2 mb-4">
+                <svg className="w-6 h-6 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.36 9.36l.57 4.32H5.07l.57-4.32M6.9 18c-.66 0-1.2.54-1.2 1.2S6.24 20.4 6.9 20.4s1.2-.54 1.2-1.2-.54-1.2-1.2-1.2m10.2 0c-.66 0-1.2.54-1.2 1.2s.54 1.2 1.2 1.2 1.2-.54 1.2-1.2-.54-1.2-1.2-1.2M5 9h14V6H5v3z"/>
+                </svg>
+                <span className="font-bold text-white">ScootyBook</span>
+              </Link>
+              <p className="text-sm">Your trusted scooty rental partner in Weligama.</p>
             </div>
-            
-            {/* Google Maps Embed */}
-            <div className="card bg-base-200 shadow-xl">
-              <div className="card-body p-0">
-                <div className="aspect-video w-full">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.8!2d79.8!3d6.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTQnMDAuMCJOIDc5wrA0OCcwMC4wIkU!5e0!3m2!1sen!2slk!4v1234567890"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="ScootyBook Store Location"
-                  ></iframe>
-                </div>
-                <div className="p-4">
-                  <p className="text-sm text-center text-base-content/70">
-                    Interactive map showing our store location
-                  </p>
-                </div>
-              </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-sky-400 transition">Home</a></li>
+                <li><a href="#features" className="hover:text-sky-400 transition">Features</a></li>
+                <li><Link to="/scooties" className="hover:text-sky-400 transition">Browse Bikes</Link></li>
+                <li><a href="#" className="hover:text-sky-400 transition">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Company</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-sky-400 transition">About</a></li>
+                <li><a href="#" className="hover:text-sky-400 transition">Blog</a></li>
+                <li><a href="#" className="hover:text-sky-400 transition">Privacy</a></li>
+                <li><a href="#" className="hover:text-sky-400 transition">Terms</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Contact</h4>
+              <ul className="space-y-2 text-sm">
+                <li>Email: info@scootybook.com</li>
+                <li>Phone: +94 77 123 4567</li>
+                <li>Address: Weligama, Sri Lanka</li>
+              </ul>
             </div>
           </div>
+          <div className="border-t border-slate-800 pt-8 text-center text-sm">
+            <p>&copy; 2024 ScootyBook. All rights reserved.</p>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };

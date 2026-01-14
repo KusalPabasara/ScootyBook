@@ -44,6 +44,18 @@ mongoose.connect(MONGODB_URI, {
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
 
+// Health check endpoint (before routes)
+app.get('/health', (req, res) => {
+  const healthCheck = {
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development'
+  };
+  res.status(200).json(healthCheck);
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/oauth', require('./routes/oauth'));

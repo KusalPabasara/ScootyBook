@@ -1,28 +1,27 @@
 import React from 'react';
-import Hero3D from '../components/Hero3D';
-import { WeligamaFeatures } from '../components/WeligamaFeatures';
-import { TouristInfo } from '../components/Tourism/TouristInfo';
-import { FleetShowcase } from '../components/FleetShowcase';
-import { CulturalFooter } from '../components/CulturalElements/CulturalFooter';
+import EagleRiderHero from '../components/EagleRiderHero';
+import BikeFleet from '../components/BikeFleet';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PopularRoutes from '../components/PopularRoutes';
+import EagleRiderFooter from '../components/EagleRiderFooter';
 
 const Home: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-[#1A1A1A]">
+      {/* Hero Section with Booking Widget */}
+      <EagleRiderHero />
 
-      {/* Hero Section with Three.js */}
-      <Hero3D />
+      {/* Fleet Section */}
+      <BikeFleet />
 
-      {/* Weligama Features Section */}
-      <WeligamaFeatures />
+      {/* Why Choose Us */}
+      <WhyChooseUs />
 
-      {/* Fleet Showcase */}
-      <FleetShowcase />
+      {/* Popular Routes */}
+      <PopularRoutes />
 
-      {/* Tourist Information */}
-      <TouristInfo />
-
-      {/* Cultural Footer */}
-      <CulturalFooter />
+      {/* Footer */}
+      <EagleRiderFooter />
     </div>
   );
 };

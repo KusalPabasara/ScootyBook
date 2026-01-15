@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Sri Lankan Theme - Custom Styles */
 
 :root {
@@ -5,17 +9,17 @@
   --ocean-light: #38BDF8;
   --ocean: #0EA5E9;
   --ocean-dark: #0369A1;
-  
+
   /* Sunset */
   --sunset-light: #FB923C;
   --sunset: #F97316;
   --sunset-dark: #EA580C;
-  
+
   /* Natural - Tropical */
   --palm: #10B981;
   --sand: #F5F5DC;
   --coconut: #78716C;
-  
+
   /* Cultural - Traditional */
   --saffron: #FB923C;
   --temple-gold: #F59E0B;
@@ -27,9 +31,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -42,7 +48,7 @@
 
 /* Batik Pattern Background */
 .batik-pattern {
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 50%, rgba(251, 146, 60, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
@@ -77,6 +83,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-40px);
   }
@@ -97,6 +104,7 @@
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -125,9 +133,12 @@
 
 /* Pulse effect for live indicators */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -187,15 +198,18 @@ html {
 /* Text glow effect */
 .text-glow {
   text-shadow: 0 0 10px rgba(251, 146, 60, 0.7),
-               0 0 20px rgba(251, 146, 60, 0.5),
-               0 0 30px rgba(251, 146, 60, 0.3);
+    0 0 20px rgba(251, 146, 60, 0.5),
+    0 0 30px rgba(251, 146, 60, 0.3);
 }
 
 /* Float animation for elements */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }

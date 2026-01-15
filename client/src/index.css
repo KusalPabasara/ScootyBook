@@ -1,317 +1,129 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Sri Lankan Theme - Custom Styles */
 
-/* Custom Theme Variables */
 :root {
-  /* Light Theme Colors - Light backgrounds, dark text/icons */
-  --primary: #2563eb;
-  --primary-content: #ffffff;
-  --secondary: #64748b;
-  --secondary-content: #ffffff;
-  --accent: #f59e0b;
-  --accent-content: #ffffff;
-  --neutral: #1e293b;
-  --neutral-content: #ffffff;
-  --base-100: #ffffff;
-  --base-200: #f8fafc;
-  --base-300: #e2e8f0;
-  --base-content: #1e293b;
-  --info: #0ea5e9;
-  --info-content: #ffffff;
-  --success: #10b981;
-  --success-content: #ffffff;
-  --warning: #f59e0b;
-  --warning-content: #ffffff;
-  --error: #ef4444;
-  --error-content: #ffffff;
+  /* Ocean & Sky */
+  --ocean-light: #38BDF8;
+  --ocean: #0EA5E9;
+  --ocean-dark: #0369A1;
+  
+  /* Sunset */
+  --sunset-light: #FB923C;
+  --sunset: #F97316;
+  --sunset-dark: #EA580C;
+  
+  /* Natural - Tropical */
+  --palm: #10B981;
+  --sand: #F5F5DC;
+  --coconut: #78716C;
+  
+  /* Cultural - Traditional */
+  --saffron: #FB923C;
+  --temple-gold: #F59E0B;
+  --prayer-flag: #3B82F6;
 }
 
-[data-theme="dark"] {
-  /* Dark Theme Colors - Dark backgrounds, light text/icons */
-  --primary: #3b82f6;
-  --primary-content: #ffffff;
-  --secondary: #64748b;
-  --secondary-content: #ffffff;
-  --accent: #f59e0b;
-  --accent-content: #ffffff;
-  --neutral: #0f172a;
-  --neutral-content: #ffffff;
-  --base-100: #0f172a;
-  --base-200: #1e293b;
-  --base-300: #334155;
-  --base-content: #f1f5f9;
-  --info: #0ea5e9;
-  --info-content: #ffffff;
-  --success: #10b981;
-  --success-content: #ffffff;
-  --warning: #f59e0b;
-  --warning-content: #ffffff;
-  --error: #ef4444;
-  --error-content: #ffffff;
+/* Animated Gradient Text */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Custom Styles */
-.theme-toggle {
-  transition: all 0.3s ease;
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1);
+/* Batik Pattern Background */
+.batik-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(251, 146, 60, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+  background-size: cover;
+  background-attachment: fixed;
 }
 
+/* Lotus Pattern Divider */
+.lotus-divider {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FB923C' fill-opacity='0.1'%3E%3Cpath d='M30 20c-5.523 0-10-4.477-10-10S24.477 0 30 0s10 4.477 10 10-4.477 10-10 10zm0 20c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Wave Effect */
+.wave-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-effect::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 25%, rgba(14, 165, 233, 0.1) 25%, rgba(14, 165, 233, 0.1) 50%, transparent 50%, transparent 75%, rgba(14, 165, 233, 0.1) 75%);
+  background-size: 40px 40px;
+  animation: wave 10s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-40px);
+  }
+}
+
+/* Smooth hover effects for cards */
 .card-hover {
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] .card-hover:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+/* Beach vibes shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary));
-  border: none;
-  transition: all 0.3s ease;
+.shimmer {
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, var(--primary), var(--primary));
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+/* Palm leaf decoration */
+.palm-decoration {
+  position: relative;
 }
 
-.btn-secondary {
-  background: var(--secondary);
-  border: 1px solid var(--secondary);
-  transition: all 0.3s ease;
+.palm-decoration::before {
+  content: '🌴';
+  position: absolute;
+  opacity: 0.1;
+  font-size: 120px;
+  right: -40px;
+  top: -40px;
+  pointer-events: none;
 }
 
-.btn-secondary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
-}
-
-.btn-accent {
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  transition: all 0.3s ease;
-}
-
-.btn-accent:hover {
-  background: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-}
-
-/* Smooth transitions for theme changes */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Ensure proper contrast for text and icons */
-.text-base-content {
-  color: var(--base-content) !important;
-}
-
-.text-primary {
-  color: var(--primary) !important;
-}
-
-.text-secondary {
-  color: var(--secondary) !important;
-}
-
-.text-accent {
-  color: var(--accent) !important;
-}
-
-.text-info {
-  color: var(--info) !important;
-}
-
-.text-success {
-  color: var(--success) !important;
-}
-
-.text-warning {
-  color: var(--warning) !important;
-}
-
-.text-error {
-  color: var(--error) !important;
-}
-
-/* Ensure SVG icons inherit proper colors */
-svg {
-  color: inherit;
-}
-
-/* Fix dropdown visibility in light mode */
-.dropdown-content {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-  border: 1px solid var(--base-300) !important;
-}
-
-.dropdown-content li a {
-  color: var(--base-content) !important;
-}
-
-.dropdown-content li a:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-.dropdown-content li button {
-  color: var(--base-content) !important;
-}
-
-.dropdown-content li button:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-/* Fix DaisyUI dropdown classes */
-.menu-sm.dropdown-content {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-  border: 1px solid var(--base-300) !important;
-}
-
-.menu-sm.dropdown-content li a {
-  color: var(--base-content) !important;
-}
-
-.menu-sm.dropdown-content li a:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-.menu-sm.dropdown-content li button {
-  color: var(--base-content) !important;
-}
-
-.menu-sm.dropdown-content li button:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-/* Fix all dropdown content */
-.dropdown-content,
-.menu-dropdown,
-.menu-sm.dropdown-content {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-  border: 1px solid var(--base-300) !important;
-}
-
-.dropdown-content *,
-.menu-dropdown *,
-.menu-sm.dropdown-content * {
-  color: var(--base-content) !important;
-}
-
-/* Specific fixes for navbar dropdowns */
-.navbar .dropdown-content {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-  border: 1px solid var(--base-300) !important;
-}
-
-.navbar .dropdown-content li a {
-  color: var(--base-content) !important;
-}
-
-.navbar .dropdown-content li a:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-.navbar .dropdown-content li button {
-  color: var(--base-content) !important;
-}
-
-.navbar .dropdown-content li button:hover {
-  background-color: var(--base-200) !important;
-  color: var(--base-content) !important;
-}
-
-/* Fix user dropdown specifically */
-.dropdown-end .dropdown-content {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-  border: 1px solid var(--base-300) !important;
-}
-
-.dropdown-end .dropdown-content li {
-  color: var(--base-content) !important;
-}
-
-.dropdown-end .dropdown-content li a {
-  color: var(--base-content) !important;
-}
-
-.dropdown-end .dropdown-content li button {
-  color: var(--base-content) !important;
-}
-
-/* Comprehensive dropdown fix */
-.dropdown-content,
-.dropdown-content *,
-.menu-sm.dropdown-content,
-.menu-sm.dropdown-content *,
-.dropdown-end .dropdown-content,
-.dropdown-end .dropdown-content * {
-  background-color: var(--base-100) !important;
-  color: var(--base-content) !important;
-}
-
-.dropdown-content li:hover,
-.menu-sm.dropdown-content li:hover,
-.dropdown-end .dropdown-content li:hover {
-  background-color: var(--base-200) !important;
-}
-
-/* Ensure text visibility in light mode */
-[data-theme="light"] .dropdown-content,
-[data-theme="light"] .dropdown-content *,
-[data-theme="light"] .menu-sm.dropdown-content,
-[data-theme="light"] .menu-sm.dropdown-content * {
-  background-color: #ffffff !important;
-  color: #1e293b !important;
-}
-
-[data-theme="light"] .dropdown-content li:hover,
-[data-theme="light"] .menu-sm.dropdown-content li:hover {
-  background-color: #f8fafc !important;
-  color: #1e293b !important;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--base-200);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* Loading animation */
+/* Pulse effect for live indicators */
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
@@ -321,207 +133,71 @@ svg {
   }
 }
 
-.loading-pulse {
+.animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Remove blinking cursor and improve focus states */
-* {
-  caret-color: transparent;
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
 }
 
-/* Remove blinking cursor from all input elements */
-input, textarea, select {
-  caret-color: transparent;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-/* Only show cursor when actively typing */
-input:focus, textarea:focus, select:focus {
-  caret-color: var(--primary);
+::-webkit-scrollbar-track {
+  background: #1e293b;
 }
 
-/* Remove outline and add custom focus styles */
-*:focus {
-  outline: none;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--ocean), var(--sunset));
+  border-radius: 6px;
 }
 
-/* Custom focus styles for interactive elements */
-button:focus,
-.btn:focus,
-input:focus,
-textarea:focus,
-select:focus,
-a:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--ocean-dark), var(--sunset-dark));
 }
 
-/* Remove focus styles for mouse users */
-button:focus:not(:focus-visible),
-.btn:focus:not(:focus-visible),
-input:focus:not(:focus-visible),
-textarea:focus:not(:focus-visible),
-select:focus:not(:focus-visible),
-a:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
+/* Loading spinner */
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: var(--sunset);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 
-/* Keep focus styles for keyboard navigation */
-button:focus-visible,
-.btn:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Disable text selection on non-text elements */
-button, .btn, .card, .navbar, .menu {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-/* Allow text selection in input fields and content areas */
-input, textarea, .content, .text-content {
-  user-select: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
-
-/* Remove cursor pointer from non-clickable elements */
-body, html, div, span, p, h1, h2, h3, h4, h5, h6 {
-  cursor: default;
-}
-
-/* Ensure clickable elements have pointer cursor */
-button, .btn, a, [role="button"], [onclick] {
-  cursor: pointer;
-}
-
-/* Remove cursor from disabled elements */
-button:disabled, .btn:disabled, input:disabled, textarea:disabled, select:disabled {
-  cursor: not-allowed;
-}
-
-/* Image Slider Styles */
-.image-slider-container {
-  position: relative;
-}
-
-.image-slider-main {
-  transition: all 0.3s ease-in-out;
-}
-
-.image-slider-thumbnails {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) transparent;
-}
-
-.image-slider-thumbnails::-webkit-scrollbar {
-  height: 6px;
-}
-
-.image-slider-thumbnails::-webkit-scrollbar-track {
-  background: var(--base-200);
-  border-radius: 3px;
-}
-
-.image-slider-thumbnails::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
-
-.image-slider-thumbnails::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-  opacity: 0.8;
-}
-
-.image-slider-nav-btn {
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-}
-
-.image-slider-nav-btn:hover {
-  transform: scale(1.1);
-}
-
-.image-slider-counter {
-  backdrop-filter: blur(8px);
-  transition: all 0.2s ease;
-}
-
-.image-slider-thumbnail {
-  transition: all 0.2s ease;
-}
-
-.image-slider-thumbnail:hover {
-  transform: scale(1.05);
-}
-
-.image-slider-thumbnail.active {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-/* Glassmorphism Styles */
-.glass-card {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.1);
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
-.glass-feature-card {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+/* Text glow effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(251, 146, 60, 0.7),
+               0 0 20px rgba(251, 146, 60, 0.5),
+               0 0 30px rgba(251, 146, 60, 0.3);
 }
 
-/* Animations */
+/* Float animation for elements */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  50% {
-    transform: translateY(-30px) translateX(10px);
-  }
-}
-
-@keyframes float-slower {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  50% {
-    transform: translateY(-40px) translateX(-15px);
-  }
-}
-
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    transform: translateY(-10px);
   }
 }
 
@@ -529,38 +205,24 @@ button:disabled, .btn:disabled, input:disabled, textarea:disabled, select:disabl
   animation: float 3s ease-in-out infinite;
 }
 
-.animate-float-slow {
-  animation: float-slow 8s ease-in-out infinite;
+/* Tropical gradient backgrounds */
+.gradient-tropical {
+  background: linear-gradient(135deg, var(--ocean) 0%, var(--palm) 100%);
 }
 
-.animate-float-slower {
-  animation: float-slower 10s ease-in-out infinite;
+.gradient-sunset {
+  background: linear-gradient(135deg, var(--sunset) 0%, var(--temple-gold) 100%);
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 8s ease infinite;
+.gradient-ocean {
+  background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean-light) 100%);
 }
 
-/* Smooth scroll for entire page */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .palm-decoration::before {
+    font-size: 60px;
+    right: -20px;
+    top: -20px;
+  }
 }

@@ -1,0 +1,97 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# SCOOTYBOOK VPS DEPLOYMENT - COPY & PASTE COMMANDS
+# ═══════════════════════════════════════════════════════════════════════════
+# 
+# Follow these steps in order. Copy each command block and paste into your VPS.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 1: CONNECT TO VPS
+# ═══════════════════════════════════════════════════════════════════════════
+
+ssh root@152.42.185.253
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 2: QUICK SETUP (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+curl -o /tmp/quick-setup.sh https://raw.githubusercontent.com/KusalPabasara/ScootyBook/main/quick-setup.sh && chmod +x /tmp/quick-setup.sh && bash /tmp/quick-setup.sh
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 3: EDIT ENVIRONMENT FILE (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+nano /apps/scootybook/.env
+
+# Update these values:
+# MONGODB_URI=mongodb://localhost:27017/scootybook
+# JWT_SECRET=your_strong_random_secret_min_32_chars
+# SMTP_HOST=smtp.gmail.com
+# SMTP_PORT=587
+# SMTP_USER=your_email@gmail.com
+# SMTP_PASS=your_app_specific_password
+# GOOGLE_MAPS_API_KEY=AIzaSyBcXN9OTtI5plUcbX5Y4QucMrK3-0ftaSk
+#
+# Press: Ctrl+O, Enter, Ctrl+X
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 4: SETUP NGINX (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+curl -o /etc/nginx/sites-available/scootybook https://raw.githubusercontent.com/KusalPabasara/ScootyBook/main/nginx.conf && ln -s /etc/nginx/sites-available/scootybook /etc/nginx/sites-enabled/scootybook && nginx -t && systemctl restart nginx
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 5: SSL CERTIFICATE (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+apt-get update && apt-get install -y certbot python3-certbot-nginx && certbot certonly --nginx -d scootybook.kusalpabasara.me -d www.scootybook.kusalpabasara.me && systemctl restart nginx
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 6: DEPLOY APPLICATION (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+cd /apps/scootybook && git clone https://github.com/KusalPabasara/ScootyBook.git temp && cp -r temp/* . && cp -r temp/.github . && rm -rf temp && npm install --production
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 7: BUILD FRONTEND (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+cd /apps/scootybook/client && npm install && REACT_APP_API_URL=https://scootybook.kusalpabasara.me/api REACT_APP_GOOGLE_MAPS_API_KEY=AIzaSyBcXN9OTtI5plUcbX5Y4QucMrK3-0ftaSk npm run build && cd ..
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 8: START APPLICATION (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pm2 start ecosystem.config.js && pm2 save && systemctl start scootybook
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 9: VERIFY DEPLOYMENT (Run on VPS)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pm2 status && pm2 logs scootybook --lines 20
+
+# Test locally
+curl http://localhost:5001/health
+
+# Test externally (wait 5 minutes for DNS)
+curl https://scootybook.kusalpabasara.me/health
+
+# ═══════════════════════════════════════════════════════════════════════════
+# VERIFICATION CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# ✓ pm2 status shows "online"
+# ✓ systemctl status nginx shows "active (running)"
+# ✓ curl http://localhost:5001/health returns 200
+# ✓ https://scootybook.kusalpabasara.me loads in browser
+# ✓ No errors in pm2 logs
+#
+# ═══════════════════════════════════════════════════════════════════════════
+# YOUR SITE IS LIVE AT: https://scootybook.kusalpabasara.me
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Future updates will auto-deploy via GitHub Actions!
+# Just: git push origin main
+#
+# ═══════════════════════════════════════════════════════════════════════════
